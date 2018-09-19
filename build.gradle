@@ -1,0 +1,61 @@
+plugins {
+    // Plugins: Internal
+    id 'java'
+    id 'application'
+    id 'distribution'
+    id 'idea'
+    id 'eclipse'
+    id 'jacoco'
+
+    // Plugins: Frameworks
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.4.RELEASE'
+
+    // Plugins: Tools
+    id "com.bmuschko.docker-java-application" version "3.2.6"
+    id 'com.github.ben-manes.versions' version '0.17.0'
+    id "com.diffplug.gradle.spotless" version "3.10.0"
+}
+
+repositories {
+    mavenLocal()
+    maven { url "https://nexus.comcast.com/nexus/content/groups/public" }
+    maven { url "https://nexus.comcast.com/nexus/content/repositories/snapshots" }
+    maven { url "https://nexus.comcast.com/nexus/content/repositories/releases" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    mavenCentral()
+}
+
+group 'com.comcast.xhwholesale.template'
+version '1.0-SNAPSHOT'
+mainClassName = "com.chetan.microservices.vertx.launchtool.Application"
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+wrapper {
+    gradleVersion = 4.6
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    ioVertxVersion = '3.5.0'
+    logbackVersion = '1.2.3'
+}
+
+dependencies {
+    compile(group: 'com.comcast.xhwholesale', name: 'dh-template-spring-vertx', version: '0.3.0.0-SNAPSHOT'){
+        exclude group:'com.amazonaws',module:'aws-xray-recorder-sdk-aws-sdk-instrumentor'
+    }
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile "com.github.tomakehurst:wiremock:2.+"
+    testCompile group: 'io.vertx', name: 'vertx-unit', version: "${ioVertxVersion}"
+
+}
+
+

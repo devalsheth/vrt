@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: new-project-launch-tool
+  verticle:
+    numOfInstances: 1
+
+logging:
+  config: 'classpath:logback-spring.xml'
+  level:
+    com.comcast: 'ERROR'
+    org.springframework.web: 'ERROR'
+
+foo: local_bar

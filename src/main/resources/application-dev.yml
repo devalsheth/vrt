@@ -1,0 +1,4 @@
+logging:
+  level:
+    com.comcast: 'INFO'
+    org.springframework.web: 'INFO'
